@@ -94,19 +94,41 @@
     <div class="content-wrap">
         <div class="container clearfix">
             <div class="heading-block topmargin-lg center">
-                <h2>Escanei o QR Code do posto:</h2>
-                <span class="divcenter">Para identificar em qual posto de trabalho você está , escanei o Qr da unidade</span>
-                <center>
-                    <video muted autoplay playsinline id="qr-video" width="400px"></video>
-                </center>
-                <canvas id="debug-canvas">
+                <h2>Venda de ingresso:</h2>
+                <div class="line"></div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="InputName">Nome do Cliente</label>
+                        <input type="name" class="form-control" id="InputName" placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="InputFone">Telefone</label>
+                        <input type="" class="form-control" id="InputFone" placeholder="Número para contato">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="InputState">Ingresso</label>
+                        <select id="inputState" class="form-control">
+                            <option selected="">Choose...</option>
+                            <option>Crianças acima de 10 anos</option>
+                            <option>Combo mãe e filho (1 ingresso)</option>
+                            <option>Combo casal (2 adultos sem criança)</option>
+                            <option>Combo família (3 pessoas)</option>
+                            <option>Combo Família II (4 pessoas) -R$ 110,00</option>
+                            <option>Combo Mega (15 pessoas, 30 min. + avulso)</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="InputpaymentMethod">Pagamento</label>
+                        <select id="inputpaymentMethod" class="form-control">
+                            <option selected="">Choose...</option>
+                            <option>Dinheiro</option>
+                            <option>Cartão</option>
+                            <option>Cobrar</option>
+                        </select>
+                    </div>
                     
-                </canvas>
-
-                <center><div id="qrcode" ></div></center>
-                <div class="topmargin-lg center">
-                    <button class="button button-3d nomargin">Voltar</button>
-                </div>      
+                </div>     
             </div>
         </div>
     </div>

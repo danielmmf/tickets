@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html dir="ltr" lang="en-US" ng-app="sampleApp">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="SemiColonWeb" />
@@ -72,7 +72,7 @@
         }
     </script>
 </head>
-<body class="stretched">
+<body class="stretched" ng-controller="SampleCtrl">
 
 <div id="wrapper" class="clearfix">
 
@@ -90,27 +90,42 @@
     </div>
 </section>
 
-<section id="content">
-    <div class="content-wrap">
-        <div class="container clearfix">
-            <div class="heading-block topmargin-lg center">
-                <h2>Escanei o QR Code do posto:</h2>
-                <span class="divcenter">Para identificar em qual posto de trabalho você está , escanei o Qr da unidade</span>
-                <center>
-                    <video muted autoplay playsinline id="qr-video" width="400px"></video>
-                </center>
-                <canvas id="debug-canvas">
-                    
-                </canvas>
+        <section id="content">
+            <div class="content-wrap">
+                <div class="container clearfix">
+                    <div class="fancy-title title-border">
+                        <h4>Convites vendidos</h4>
+                    </div>
+                    <div class="postcontent nobottommargin clearfix">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Tel.</th>
+                                    <th>Valor</th>
+                                    <th>Pagamento</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="message in messages">
+                                    <td>1</td>
+                                    <td>{{message.clientName}}</td>
+                                    <td>{{message.clientPhone}}</td>
+                                    <td>{{message.ticketValue}}</td>
+                                    <td>{{message.paymentMethod}}</td>
+                                    <td><a href="#" class="button button-large button-circle button-purple" ng-click="messages.$remove(message)"><i class="icon-lock3"></i>Remover</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="line"></div>
+                        <a href="/receber-2.html" class="button button-large button-circle button-leaf" ><i class="icon-tags"></i>Receber convite</a>
+                    </div>
 
-                <center><div id="qrcode" ></div></center>
-                <div class="topmargin-lg center">
-                    <button class="button button-3d nomargin">Voltar</button>
-                </div>      
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
 
 <footer id="footer" class="dark" style="background-color: #000;">
@@ -130,5 +145,39 @@
 <script src="js/plugins.js"></script>
 
 <script src="js/functions.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script type="text/javascript">
+    var config = {
+        apiKey: "AIzaSyCs7QgMjDqRJJ6lw9heZFEYNERaWi3ja74",
+        authDomain: "gr-360.firebaseapp.com",
+        databaseURL: "https://gr-360.firebaseio.com",
+        projectId: "gr-360",
+        storageBucket: "gr-360.appspot.com",
+        messagingSenderId: "686521366589",
+        appId: "1:686521366589:web:1f0aceba681a0c5e869254",
+        measurementId: "G-YRTC6WYQ2D"
+      };
+  firebase.initializeApp(config);
+    var app = angular.module("sampleApp", ["firebase"]);
+    app.controller("SampleCtrl", function($scope, $firebaseArray) {
+      var ref = firebase.database().ref().child("messages");
+      // create a synchronized array
+      $scope.messages = $firebaseArray(ref);
+      // add new items to the array
+      // the message is automatically added to our Firebase database!
+      $scope.addMessage = function() {
+        $scope.messages.$add({
+          text: $scope.newMessageText
+        });
+      };
+      // click on `index.html` above to see $remove() and $save() in action
+    });
+</script>
 </body>
-</html>
+</html> 
